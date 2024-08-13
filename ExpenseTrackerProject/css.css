@@ -1,0 +1,36 @@
+body {
+  padding: 20px;
+  background: rgb(178, 237, 233);
+  background: radial-gradient(
+    circle,
+    rgba(178, 237, 233, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: rgb(74, 31, 249);
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 60px;
+  text-transform: uppercase;
+}
+
+.table th {
+  color: rgb(252, 5, 5);
+  padding: 8px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+#submitButton {
+  margin-top: -30px;
+}

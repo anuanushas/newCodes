@@ -1,0 +1,26 @@
+body {
+  background-color: #f8f9fa;
+}
+
+header {
+  color: #007bff;
+}
+
+form {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+ul.list-group {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#total-price {
+  font-weight: bold;
+  color: #007bff;
+}

@@ -1,6 +1,6 @@
 
 
-const crudAPIkey = 'https://crudcrud.com/api/7515321dbd234d1a9a868b2f6fccbf1a/itemData';
+const crudAPIkey = 'https://crudcrud.com/api/40dc0e912ac3472f95ec57e81590f0fe/itemData';
 
 // Change of events when takes input
 const myForm = document.querySelector('#my-form');
@@ -27,13 +27,9 @@ function addItemList(itemDataList) {
     // Append list item to item list
     itemList.appendChild(li);
 
-    // Update total price
-    totalPrice += parseFloat(itemDataList.price);
-    totalPriceDisplay.textContent = totalPrice.toFixed(2);
-
     // Delete item when clicked
     deleteBtn.addEventListener('click', (e) => {
-        var itemCrudAPI = crudAPIkey + `/${itemDataList._id}`;
+        var itemCrudAPI = `${crudAPIkey}/${itemDataList._id}`;
 
         // Delete item
         axios
@@ -56,9 +52,11 @@ window.addEventListener("DOMContentLoaded", () => {
     axios
         .get(crudAPIkey)
         .then((response) => {
-            for (var i = 0; i < response.data.length; i++) {
-                addItemList(response.data[i]);
-            }
+            response.data.forEach(item => {
+                addItemList(item);
+                totalPrice += parseFloat(item.price);
+            });
+            totalPriceDisplay.textContent = totalPrice.toFixed(2);
         })
         .catch((error) => {
             console.log(error);
