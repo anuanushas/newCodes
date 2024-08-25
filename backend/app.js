@@ -1,22 +1,27 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// First Middleware
-app.use((req, res, next) => {
-    console.log('First Middleware');
-    next();  // Passes control to the next middleware
+// Serve the form with GET request
+app.get('/add-product', (req, res) => {
+    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>');
 });
 
-// Second Middleware
-app.use((req, res, next) => {
-    console.log('Second Middleware');
-    // Passes control to the next middleware or route
-    next();
+// Handle form submission with POST request
+app.post('/product', (req, res) => {
+    // Log the body to console
+    console.log(req.body); // Output: [Object: null prototype] { title: 'hi' }
+    console.log(req.body.title); // Output: 'hi'
+    res.redirect('/');
 });
 
-app.use((req, res) => {
-    res.send("hello i am node js")
+// Handle requests to root
+app.get('/', (req, res) => {
+    res.send('Hello from Express!');
 });
 
-const PORT = 3000;
-app.listen(PORT)
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
+});
