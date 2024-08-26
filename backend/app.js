@@ -2,26 +2,23 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+
+// Import routes
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Serve the form with GET request
-app.get('/add-product', (req, res) => {
-    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>');
+// Register routes
+app.use('/admin', adminRoutes); // Admin routes prefixed with /admin
+app.use(shopRoutes); // Other routes (like shop)
+
+// 404 Page Not Found handling (This should be placed after all route registrations)
+app.use((req, res, next) => {
+    res.status(404).send('<h1>Page Not Found</h1>'); // Simple 404 response
 });
 
-// Handle form submission with POST request
-app.post('/product', (req, res) => {
-    // Log the body to console
-    console.log(req.body); // Output: [Object: null prototype] { title: 'hi' }
-    console.log(req.body.title); // Output: 'hi'
-    res.redirect('/');
-});
-
-// Handle requests to root
-app.get('/', (req, res) => {
-    res.send('Hello from Express!');
-});
-
+// Start the server
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 });
